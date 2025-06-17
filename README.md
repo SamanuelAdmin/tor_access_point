@@ -1,6 +1,6 @@
 # Onion access point
 
-Script sets up a secure local network (with WiFi access point optional), that routes all TCP and DNS trafic throught TOR (The onion network). Another UDP and ICMP trafic will be block to maintain privacy and anonymity.
+The script sets up a secure local network (with WiFi access point optional), which routes all TCP and DNS trafic throught TOR (The onion network). Any other trafic like UDP and ICMP will be blocked to maintain privacy and anonymity.
 
 ## Features
 - Creates a wireless access point using `hostapd`
