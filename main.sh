@@ -79,9 +79,12 @@ echo ""
 
 
 # Up all useful interfaces and adding to created brige
+echo "Starting module for bridges..."
+modprobe bridge
+
 ip link delete $BRIDGE_NAME type bridge
 ip link add name $BRIDGE_NAME type bridge
-ip addr add $DHCP_LOCAL_IP/24 dev onion-bridge
+ip addr add $DHCP_LOCAL_IP/24 dev $BRIDGE_NAME
 ip link set dev $BRIDGE_NAME up
 
 for iface in $IFACES
@@ -94,7 +97,7 @@ do
 done
 
 
-if [[ $WIFI_IFACE != 0 ]] then
+if [[ $WIFI_IFACE != 0 ]]; then
     ip link set $WIFI_IFACE down
     nmcli device set $WIFI_IFACE managed no
     ip addr flush dev $WIFI_IFACE
@@ -304,6 +307,5 @@ iptables -t raw -A OUTPUT -o $BRIDGE_NAME -p icmp -j DROP
 
 echo "Done. NAT is working."
 
-sleep infinity
 
 # do smth to close script
